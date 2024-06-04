@@ -116,7 +116,7 @@ const Evaluation = () => {
         <li>
           <b>High-Fidelity Prototype:</b> The prototype demonstrates key user
           flows such as adding tasks, scheduling meetings, and viewing
-          personalized recommendations.
+          personalized recommendations. 
         </li>
         <li>
           <b>Interactive Elements:</b> Buttons and input fields are functional,
