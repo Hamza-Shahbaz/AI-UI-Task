@@ -9,6 +9,7 @@ import Root from "./components/Navbar"
 import { Tasks } from "./pages/tasks/Tasks";
 import { UserProfile } from "./pages/profile/UserProfile";
 import { Meetings } from "./pages/Meetings/Meetings";
+import Evaluation from "./pages/Evaluation/Evaluation";
 
 export default function RouteProvider() {
     const router = createBrowserRouter([
@@ -31,6 +32,10 @@ export default function RouteProvider() {
                 {
                     path: "/login",
                     element: <Login />,
+                },
+                {
+                    path: "/evaluation",
+                    element: <Evaluation />,
                 },
             ],
         },

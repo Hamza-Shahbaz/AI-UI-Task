@@ -803,3 +803,7 @@ button:hover {
   transform: translateX(0) translateY(-50%);
   border-left-color: var(--tooltip-background-color);
 }
+
+.alphabetic-list {
+  list-style-type: upper-alpha;
+}

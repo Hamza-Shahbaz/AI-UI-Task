@@ -21,6 +21,9 @@ export default function Topbar() {
               <Link to="/user-profile">User Profile</Link>
             </li>
             <li>
+              <Link to="/evaluation">Usability Evaluation</Link>
+            </li>
+            <li>
                 <button onClick={() => { 
                   logout();
                   navigate('/login');
