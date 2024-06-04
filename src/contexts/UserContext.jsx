@@ -11,12 +11,66 @@ export const UserContext = createContext({
   meetings: [],
 });
 
+const initialMeetings = [
+  {
+    meeting_title: "Demo meeting 1",
+    meeting_description:
+      "This meeting demonstrates the way meetings are displayed in the table",
+    time: "23:59",
+    reminder: "23:59",
+    id: "1",
+  },
+  {
+    meeting_title: "Demo meeting 2",
+    meeting_description:
+      "This meeting demonstrates the way meetings are displayed in the table",
+    time: "23:59",
+    reminder: "23:59",
+    id: "2",
+  },
+  {
+    meeting_title: "Demo meeting 3",
+    meeting_description:
+      "This meeting demonstrates the way meetings are displayed in the table",
+    time: "23:59",
+    reminder: "23:59",
+    id: "3",
+  },
+];
+
+const initialTasks = [
+  {
+    task_title: "Demo task 1",
+    task_description:
+      "This task demonstrates the way tasks are displayed in the table",
+    time: "23:59",
+    status: "Pending",
+    id: "1",
+  },
+  {
+    task_title: "Demo task 2",
+    task_description:
+      "This task demonstrates the way tasks are displayed in the table",
+    time: "23:59",
+    status: "Pending",
+    id: "2",
+  },
+  {
+    task_title: "Demo task 3",
+    task_description:
+      "This task demonstrates the way tasks are displayed in the table",
+    time: "23:59",
+    status: "Pending",
+    id: "3",
+  },
+];
+
 export const UserProvier = ({ children }) => {
   const userService = useRef(new UserService());
   const [loggedIn, setLoggedIn] = useState(false);
   const [name, setName] = useState("Guest");
-  const [tasks, setTasks] = useState([]);
-  const [meetings, setMeetings] = useState([]);
+  const [tasks, setTasks] = useState(initialTasks);
+  const [meetings, setMeetings] = useState(initialMeetings);
   const [taskTimers, setTaskTimers] = useState([]);
   const [meetingTimers, setMeetingTimers] = useState([]);
 
@@ -26,7 +80,7 @@ export const UserProvier = ({ children }) => {
     setName("");
     setTasks([]);
     setMeetings([]);
-    clearAllTimers()
+    clearAllTimers();
   };
 
   const login = (username, password) => {
@@ -36,27 +90,29 @@ export const UserProvier = ({ children }) => {
   };
 
   const clearTaskTimers = (task) => {
-    taskTimers.forEach((timer) => {
-      if(timer.id === task.id) {
-        console.log(timer)
-        clearTimeout(timer.timer)
+    let indexForTimer
+    taskTimers.forEach((timer, index) => {
+      if (timer.id === task.id) {
+        indexForTimer = index
+        clearTimeout(timer.timer);
+        setTaskTimers(taskTimers.filter((timer) => timer.id !== task.id))
       }
     });
   };
 
   const clearMeetingTimers = (meeting) => {
     meetingTimers.forEach((timer) => {
-      if(timer.id === meeting.id) {
-        console.log(timer)
-        clearTimeout(timer.timer)
+      if (timer.id === meeting.id) {
+        clearTimeout(timer.timer);
+        setMeetingTimers(meetingTimers.filter((timer) => timer.id !== meeting.id))
       }
     });
   };
 
   const clearAllTimers = () => {
-    taskTimers.forEach((timer) => clearTimeout(timer))
-    meetingTimers.forEach((timer) => clearTimeout(timer))
-  }
+    taskTimers.forEach((timer) => clearTimeout(timer));
+    meetingTimers.forEach((timer) => clearTimeout(timer));
+  };
 
   const scheduleTaskTimer = (task) => {
     const now = new Date();
@@ -68,11 +124,11 @@ export const UserProvier = ({ children }) => {
     const timer = setTimeout(() => {
       // Function to be executed when the timer triggers
       console.log(`Task ${task.task_title} is due!`);
-      MyToast(`Task ${task.task_title} is due!`)
-      removeTasks(task)
+      MyToast(`Task ${task.task_title} is due!`);
+      removeTasks(task);
     }, delay);
 
-    setTaskTimers((oldTimers) => oldTimers.concat({timer, id : task.id}));
+    setTaskTimers((oldTimers) => oldTimers.concat({ timer, id: task.id }));
   };
 
   const scheduleMeetingTimer = (meeting) => {
@@ -85,11 +141,13 @@ export const UserProvier = ({ children }) => {
     const timer = setTimeout(() => {
       // Function to be executed when the timer triggers
       console.log(`Meeting ${meeting.meeting_title} is due!`);
-      MyToast(`Meeting ${meeting.meeting_title} is due!`)
-      removeMeetings(meeting)
+      MyToast(`Meeting ${meeting.meeting_title} is due!`);
+      removeMeetings(meeting);
     }, delay);
 
-    setMeetingTimers((oldTimers) => oldTimers.concat({timer, id:meeting.id}));
+    setMeetingTimers((oldTimers) =>
+      oldTimers.concat({ timer, id: meeting.id })
+    );
   };
 
   const addTasks = (newTask) => {
@@ -100,7 +158,7 @@ export const UserProvier = ({ children }) => {
 
     if (inputTime < now) {
       console.error("Error task time cannot be in past");
-      MyToast("The task cannot be in the past", "error")
+      MyToast("The task cannot be in the past", "error");
       return;
     }
 
@@ -127,7 +185,7 @@ export const UserProvier = ({ children }) => {
 
     if (inputTime < now) {
       console.error("Error task time cannot be in past");
-      MyToast("The task cannot be in the past", "error")
+      MyToast("The task cannot be in the past", "error");
       return;
     }
     setMeetings((oldMeetings) => {
@@ -139,7 +197,9 @@ export const UserProvier = ({ children }) => {
 
   const removeMeetings = (removeMeeting) => {
     setMeetings((oldMeetings) => {
-      const updatedMeetings = oldMeetings.filter((item) => item.id !== removeMeeting.id);
+      const updatedMeetings = oldMeetings.filter(
+        (item) => item.id !== removeMeeting.id
+      );
       clearMeetingTimers(removeMeeting);
       return updatedMeetings;
     });

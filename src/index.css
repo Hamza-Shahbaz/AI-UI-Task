@@ -807,3 +807,15 @@ button:hover {
 .alphabetic-list {
   list-style-type: upper-alpha;
 }
+
+.btn-category {
+  border: 2px solid #ffb703 !important;
+  padding: 10px 35px;
+  display: inline-block;
+  font-weight: 500;
+  background: #ffb703 !important;
+  color: #212121;
+  transition: all ease-in-out 0.3s;
+  font-size: 1rem;
+  border-radius: 0px;
+}

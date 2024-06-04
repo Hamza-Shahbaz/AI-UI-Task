@@ -175,6 +175,7 @@ export const Meetings = () => {
                 meetings.map((item, index) => (
                   <CouponItem item={item} key={index} />
                 ))}
+                {meetings?.length === 0 && <div>You have completed all meetings. Please add new meetings</div>}
             </div>
           </div>
         </div>
