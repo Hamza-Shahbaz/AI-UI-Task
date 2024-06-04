@@ -92,8 +92,6 @@ export const UserProfile = () => {
     setRecommmendations([]);
   };
 
-  console.log(recommmendations);
-
   return (
     <div>
       <h1>{name + "'"}s profile and personalization</h1>
@@ -150,7 +148,7 @@ export const UserProfile = () => {
                     />
                     {errors.role && (
                       <p className="error" style={{ color: "red" }}>
-                        State is required
+                        Role is required
                       </p>
                     )}
                   </>
@@ -191,7 +189,7 @@ export const UserProfile = () => {
             <div className="col-xl-3 col-md-6">
               <div className="mb-4 d-flex flex-column">
                 <label>
-                  Starting Time:
+                  Time:
                   <span className="passtextColor">*</span>
                 </label>
                 <input
@@ -226,17 +224,15 @@ export const UserProfile = () => {
           style={{ width: "100px" }}
         />
       ) : (
-        recommmendations?.length > 0 && (
           <>
             <h1>Recommendations</h1>
+            {recommmendations?.length > 0 ? (
             <CouponItem
               item={recommmendations[0]}
               onClick={resetRecommendations}
-            />
+            />) : <div className="m-2">Fill info and save to get recommendations</div>}
           </>
-        )
       )}
-      {/* <input type="text" placeholder="Help AI recommendations, add improvememt notes, talk to AI"/> */}
       <input
         type="text"
         placeholder={typingEffect}

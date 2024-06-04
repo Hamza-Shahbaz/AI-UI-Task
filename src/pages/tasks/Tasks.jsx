@@ -163,6 +163,7 @@ export const Tasks = () => {
                 tasks.map((item, index) => (
                   <CouponItem item={item} key={index} />
                 ))}
+                {tasks?.length === 0 && <div>You have completed all tasks. Please add new tasks</div>}
             </div>
           </div>
         </div>

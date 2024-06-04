@@ -1,5 +1,9 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import GroupsTwoToneIcon from '@mui/icons-material/GroupsTwoTone';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 export default function Topbar() {
   const { logout } = useUser();
@@ -12,16 +16,16 @@ export default function Topbar() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Tasks</Link>
+              <Link to="/"><AssignmentIcon/> Tasks</Link>
             </li>
             <li>
-              <Link to="/meetings">Meetings</Link>
+              <Link to="/meetings"><GroupsTwoToneIcon/> Meetings</Link>
             </li>
             <li>
-              <Link to="/user-profile">User Profile</Link>
+              <Link to="/user-profile"><AccountCircleIcon/> User Profile</Link>
             </li>
             <li>
-              <Link to="/evaluation">Usability Evaluation</Link>
+              <Link to="/evaluation"><ReceiptLongIcon/> Usability Evaluation</Link>
             </li>
             <li>
                 <button onClick={() => { 
